@@ -32,31 +32,28 @@ alias ls='ls --color=auto'
 
 alias l='ls'
 alias up='cd ..'
-
-# short command
 alias a='git add'
 alias c='git commit'
 alias s='git status'
 alias k='kubectl'
 alias p='proxychains'
-
 alias h='history'
 
-# for python pip
-export PATH=$PATH:/home/$USER/.local/bin/
+alias egrep='grep -E'
 
-# for kubectl auto completion
-# [[ /usr/bin/kubectl ]] && source <(kubectl completion zsh)
-# for minikube auto completion
-# [[ /usr/bin/minikube ]] && source <(minikube completion zsh)
-# for helm auto completion
-# [[ /usr/bin/helm ]] && source <(helm completion zsh)
-
-# for proxy
+# [alias] proxy 
 alias proxyOn='export https_proxy=http://127.0.0.1:7890 && http_proxy=http://127.0.0.1:7890'
 alias proxyOff='unset https_proxy && unset http_proxy'
+# [alias] vpn script
+alias vpn="sudo bash /home/chu/openvpn/vpn"
+# [alias] data analysis python env
+alias datapy='source /home/chu/.local/pythonEnvs/Data/bin/activate'
 
+## [env]
+# python pip
+export PATH=$PATH:/home/$USER/.local/bin/
+export LANG=en_US.UTF-8
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/bin/mcli mcli
+## [complete]
 
