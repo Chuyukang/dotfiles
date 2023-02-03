@@ -1,6 +1,5 @@
 "
-" A (not so) minimal vimrc.
-"
+" A (not so) minimal vimrc.  "
 
 " You want Vim, not vi. When Vim finds a vimrc, 'nocompatible' is set anyway.
 " We set it explicitely to make our position clear!
@@ -66,33 +65,61 @@ endif
 "set viminfo     ='100,n$HOME/.vim/files/info/viminfo
 
 " enable 256-color mode
-let &t_Co=256
-let &t_AF="\e[38;5;%dm"
-let &t_AB="\e[48;5;%dm"
+"let &t_Co=256
+"let &t_AF="\e[38;5;%dm"
+"let &t_AB="\e[48;5;%dm"
+
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+
+" file encode setting
+set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
+set enc=utf8
+set fencs=utf8,gbk,gb2312,gb18030
 
 call plug#begin('~/.vim/plugged')
-Plug 'KeitaNakamura/neodark.vim'
-Plug 'morhetz/gruvbox'
-Plug 'KabbAmine/yowish.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'joshdick/onedark.vim'
-Plug 'ycm-core/YouCompleteMe'
-Plug 'preservim/nerdtree'
-Plug 'skywind3000/asyncrun.vim'
-"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'KeitaNakamura/neodark.vim'
+ Plug 'joshdick/onedark.vim'
+" Plug 'morhetz/gruvbox'
+" Plug 'KabbAmine/yowish.vim'
+ Plug 'vim-airline/vim-airline'
+ Plug 'wakatime/vim-wakatime'
+ Plug 'ycm-core/YouCompleteMe'
+ Plug 'junegunn/fzf.vim'
+ Plug 'vim-autoformat/vim-autoformat'
 call plug#end()
 
 " solve the delay when changing from insert mode to normal mode
 set timeoutlen=1000 ttimeoutlen=0
 
-"colorscheme onedark
-colorscheme yowish
-set background=dark
-"colorscheme gruvbox
-"set background=light
-"
-"
+" yowish gruvbox
+colorscheme onedark
+" light
+"set background=dark
+
+" airline setting
+let g:airline_powerline_fonts = 1
+"let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#whitespace#enabled = 0
+
 "key map
-nmap <C-]>  :YcmCompleter GoToDefinition <CR>
-nmap <F2>   :NERDTreeToggle <CR>
-imap jj     <Esc>
+nnoremap <C-]>      :YcmCompleter GoToDefinition <CR>
+nnoremap <leader>gd :YcmCompleter GoToDefinition <CR>
+nnoremap <leader>gr :YcmCompleter GoToReferences <CR>
+
+
+nnoremap <F2>   :Explore <CR>
+inoremap jj     <Esc>
