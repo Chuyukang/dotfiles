@@ -217,8 +217,8 @@ require('telescope').setup {
   defaults = {
     mappings = {
       i = {
-            ['<C-u>'] = false,
-            ['<C-d>'] = false,
+        ['<C-u>'] = false,
+        ['<C-d>'] = false,
       },
     },
   },
@@ -249,15 +249,27 @@ require('nvim-tree').setup()
 vim.keymap.set('n', '<F2>', '<Cmd>NvimTreeToggle<CR>', { desc = 'Toggle nvim-tree', noremap = true, silent = true })
 
 -- toggleterm
-require('toggleterm').setup{
-  open_mapping = [[<c-`>]],
+require('toggleterm').setup {
+  open_mapping = [[<M-t>]],
   autochdir = false,
   insert_mappings = true,
   direction = 'float',
   auto_scroll = true
 }
 
--- illuminate
+-- when opening a folder, open nvim-tree automatically
+local function open_nvim_tree(data)
+  -- buffer is a directory
+  local directory = vim.fn.isdirectory(data.file) == 1
+  if not directory then
+    return
+  end
+  -- change to the directory
+  vim.cmd.cd(data.file)
+  -- open the tree
+  require("nvim-tree.api").tree.open()
+end
+vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 
 
 -- [[ Configure Treesitter ]]
@@ -283,41 +295,41 @@ require('nvim-treesitter.configs').setup {
       lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm
-            ['aa'] = '@parameter.outer',
-            ['ia'] = '@parameter.inner',
-            ['af'] = '@function.outer',
-            ['if'] = '@function.inner',
-            ['ac'] = '@class.outer',
-            ['ic'] = '@class.inner',
+        ['aa'] = '@parameter.outer',
+        ['ia'] = '@parameter.inner',
+        ['af'] = '@function.outer',
+        ['if'] = '@function.inner',
+        ['ac'] = '@class.outer',
+        ['ic'] = '@class.inner',
       },
     },
     move = {
       enable = true,
       set_jumps = true, -- whether to set jumps in the jumplist
       goto_next_start = {
-            [']m'] = '@function.outer',
-            [']]'] = '@class.outer',
+        [']m'] = '@function.outer',
+        [']]'] = '@class.outer',
       },
       goto_next_end = {
-            [']M'] = '@function.outer',
-            [']['] = '@class.outer',
+        [']M'] = '@function.outer',
+        [']['] = '@class.outer',
       },
       goto_previous_start = {
-            ['[m'] = '@function.outer',
-            ['[['] = '@class.outer',
+        ['[m'] = '@function.outer',
+        ['[['] = '@class.outer',
       },
       goto_previous_end = {
-            ['[M'] = '@function.outer',
-            ['[]'] = '@class.outer',
+        ['[M'] = '@function.outer',
+        ['[]'] = '@class.outer',
       },
     },
     swap = {
       enable = true,
       swap_next = {
-            ['<leader>a'] = '@parameter.inner',
+        ['<leader>a'] = '@parameter.inner',
       },
       swap_previous = {
-            ['<leader>A'] = '@parameter.inner',
+        ['<leader>A'] = '@parameter.inner',
       },
     },
   },
@@ -428,14 +440,14 @@ cmp.setup {
     end,
   },
   mapping = cmp.mapping.preset.insert {
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<CR>'] = cmp.mapping.confirm {
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-        ['<Tab>'] = cmp.mapping(function(fallback)
+    ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
@@ -444,7 +456,7 @@ cmp.setup {
         fallback()
       end
     end, { 'i', 's' }),
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
@@ -459,6 +471,10 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+-- luasnip
+require("luasnip.loaders.from_vscode").lazy_load({ path = { "~/.config/nvim/snippets.json" } })
+
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
