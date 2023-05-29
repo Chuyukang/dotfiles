@@ -1,6 +1,6 @@
 format = """
-[ \uf303 ](bg:#a3aed2 fg:#090c0c)\
-[](bg:#769ff0 fg:#a3aed2)\
+[ \uf303 ](fg:#090c0c bg:#a3aed2)\
+[](fg:#a3aed2 bg:#769ff0)\
 $directory\
 [](fg:#769ff0 bg:#394260)\
 $git_branch\
@@ -12,8 +12,13 @@ $golang\
 $php\
 $character"""
 
+right_format = """
+[](fg:#1d2230)\
+$time\
+"""
+
 [character]
-success_symbol = '[](fg:#212736 bg:#1d2230)'
+success_symbol = '[](fg:#1d2230)'
 error_symbol = "[✖](bold red) "
 
 [directory]
