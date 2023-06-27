@@ -5,7 +5,7 @@ SAVEHIST=1000
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/$USER/.zshrc'
+zstyle :compinstall filename '~/.zshrc'
 
 # home end key
 bindkey  "^[[H"   beginning-of-line
@@ -24,7 +24,7 @@ eval "$(starship init zsh)"
 ## [plugins]
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+#source ~/.zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 #source ~/.zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme
 eval "$(lua ~/.zsh/plugins/z.lua/z.lua  --init zsh)"
 
@@ -33,12 +33,12 @@ alias ls='ls --color=auto'
 
 alias l='ls'
 alias up='cd ..'
-alias a='git add'
-alias c='git commit'
 alias s='git status'
 alias k='kubectl'
 alias p='proxychains'
 alias h='history'
+
+alias zb='z -b'
 
 alias egrep='grep -E'
 
@@ -58,10 +58,12 @@ export PATH=$PATH:/home/$USER/.local/bin/:/home/$USER/scripts/:/home/$USER/repos
 export LANG=en_US.UTF-8
 # [env] faas-cli
 export OPENFAAS_URL="http://178.128.126.221:31112"
-export CHERI_OUT_PATH=/home/$USER/cheri/output
+export CHERI_SDK=/home/$USER/cheri/output/sdk
 #export TERM="xterm"
 
 
+# [alias] cheri binutils
+alias cherimode="export PATH=$CHERI_SDK/bin:$PATH"
 
 ## [complete]
 # for kubectl auto completion
@@ -78,4 +80,7 @@ export CHERI_OUT_PATH=/home/$USER/cheri/output
 export PNPM_HOME="/home/$USER/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
+
+# thefuck initialization
+eval $(thefuck --alias)
 
