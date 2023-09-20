@@ -14,8 +14,17 @@ $character"""
 
 right_format = """
 [](fg:#1d2230)\
+$hostname\
 $time\
 """
+
+[hostname]
+disabled = false
+ssh_only = true
+ssh_symbol = '🌏'
+style = "bg:#1d2230"
+format = '[$hostname](fg:#a0a9cb bg:#1d2230)'
+trim_at = '.companyname.com'
 
 [character]
 success_symbol = '[](fg:#1d2230)'

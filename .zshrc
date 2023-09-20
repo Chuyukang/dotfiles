@@ -5,7 +5,7 @@ SAVEHIST=1000
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '~/.zshrc'
+zstyle :compinstall filename '/home/chu/.zshrc'
 
 # home end key
 bindkey  "^[[H"   beginning-of-line
@@ -22,7 +22,7 @@ eval "$(starship init zsh)"
 # PROMPT="%n@%m:%d$"
 
 ## [plugins]
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 #source ~/.zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 #source ~/.zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme
@@ -33,17 +33,20 @@ alias ls='ls --color=auto'
 
 alias l='ls'
 alias up='cd ..'
-alias s='git status'
 alias k='kubectl'
 alias p='proxychains'
 alias h='history'
+
+alias g='git'
+alias s='git status'
 
 alias zb='z -b'
 
 alias egrep='grep -E'
 
+PROXY_URL=http://172.25.144.1:7890
 # [alias] proxy 
-alias proxyOn='export https_proxy=http://127.0.0.1:7890 && http_proxy=http://127.0.0.1:7890'
+alias proxyOn="export https_proxy=$PROXY_URL && http_proxy=$PROXY_URL"
 alias proxyOff='unset https_proxy && unset http_proxy'
 # [alias] vpn script
 alias vpn="sudo bash /home/$USER/openvpn/vpn"
@@ -80,7 +83,4 @@ alias cherimode="export PATH=$CHERI_SDK/bin:$PATH"
 export PNPM_HOME="/home/$USER/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
-
-# thefuck initialization
-eval $(thefuck --alias)
 
