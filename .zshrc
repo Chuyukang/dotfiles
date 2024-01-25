@@ -46,8 +46,8 @@ alias egrep='grep -E'
 
 PROXY_URL=http://172.25.144.1:7890
 # [alias] proxy 
-alias proxyOn="export https_proxy=$PROXY_URL && http_proxy=$PROXY_URL"
-alias proxyOff='unset https_proxy && unset http_proxy'
+alias p="export https_proxy=$PROXY_URL && http_proxy=$PROXY_URL"
+alias np='unset https_proxy && unset http_proxy'
 # [alias] vpn script
 alias vpn="sudo bash /home/$USER/openvpn/vpn"
 # [alias] data analysis python env
