@@ -26,21 +26,21 @@ source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 #source ~/.zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 #source ~/.zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme
-eval "$(lua ~/.zsh/plugins/z.lua/z.lua  --init zsh)"
+#eval "$(lua ~/.zsh/plugins/z.lua/z.lua  --init zsh)"
+eval "$(zoxide init zsh)"
 
 ## [alias]
 alias ls='ls --color=auto'
 
 alias l='ls'
 alias up='cd ..'
+alias zb='cd "$(git rev-parse --show-toplevel)"'
 alias k='kubectl'
 alias p='proxychains'
 alias h='history'
 
 alias g='git'
 alias s='git status'
-
-alias zb='z -b'
 
 alias egrep='grep -E'
 
@@ -56,6 +56,7 @@ alias datapy="source /home/$USER/.local/pythonEnvs/datapy/bin/activate"
 
 ## [env]
 export EDITOR=nvim
+export BROWSER=google-chrome-stable
 # python pip
 export PATH=$PATH:/home/$USER/.local/bin/:/home/$USER/scripts/:/home/$USER/repos/cheri-exercises/tools/
 export LANG=en_US.UTF-8
