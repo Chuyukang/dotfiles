@@ -26,8 +26,10 @@ source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 #source ~/.zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 #source ~/.zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme
-#eval "$(lua ~/.zsh/plugins/z.lua/z.lua  --init zsh)"
 eval "$(zoxide init zsh)"
+
+# [env] import env setting per host
+source ~/.zsh_env_vars
 
 ## [alias]
 alias ls='ls --color=auto'
@@ -36,7 +38,6 @@ alias l='ls'
 alias up='cd ..'
 alias zb='cd "$(git rev-parse --show-toplevel)"'
 alias k='kubectl'
-alias p='proxychains'
 alias h='history'
 
 alias g='git'
@@ -44,7 +45,6 @@ alias s='git status'
 
 alias egrep='grep -E'
 
-PROXY_URL=http://172.25.144.1:7890
 # [alias] proxy 
 alias p="export https_proxy=$PROXY_URL && http_proxy=$PROXY_URL"
 alias np='unset https_proxy && unset http_proxy'
@@ -60,10 +60,7 @@ export BROWSER=google-chrome-stable
 # python pip
 export PATH=$PATH:/home/$USER/.local/bin/:/home/$USER/scripts/:/home/$USER/repos/cheri-exercises/tools/
 export LANG=en_US.UTF-8
-# [env] faas-cli
-export OPENFAAS_URL="http://178.128.126.221:31112"
 export CHERI_SDK=/home/$USER/cheri/output/sdk
-#export TERM="xterm"
 
 
 # [alias] cheri binutils
