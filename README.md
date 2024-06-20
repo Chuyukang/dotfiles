@@ -2,7 +2,7 @@
 
 ## .zsh_env_vars
 
-Configure file that save env_vars per host, like PROXY_URL.
+Configure file that save env_vars per host, like PROXY_URL and anything want to be set locally.
 
 ## tmux
 
@@ -17,3 +17,4 @@ usages:
 - zoxide
 - neovim
 - git
+- win32yank(windows clipboard)
