@@ -14,6 +14,10 @@ bindkey  "^[[3~"  delete-char
 
 
 # User specify
+## [completion]
+# config from: https://thevaluable.dev/zsh-completion-guide-examples/
+source $HOME/.zsh/completion.zsh
+
 ## [prompt]
 # PS1="[\u@\h \W]\$ "
 # PS1="\W \$ "
