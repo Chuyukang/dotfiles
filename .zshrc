@@ -48,11 +48,15 @@ alias egrep='grep -E'
 # [alias] proxy 
 alias p="export https_proxy=$PROXY_URL && http_proxy=$PROXY_URL"
 alias np='unset https_proxy && unset http_proxy'
-# [alias] vpn script
-alias vpn="sudo bash /home/$USER/openvpn/vpn"
 # [alias] data analysis python env
 alias datapy="source /home/$USER/.local/pythonEnvs/datapy/bin/activate"
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
+
+# [alias] share file in this host
+# NOTE: default bind 0.0.0.0, should use internal ip address
+alias fs="python3 -m http.server"
+# [alias] get file from outside
+alias lf="nc -lp 8180 >"
 
 ## [env]
 export EDITOR=nvim
@@ -60,11 +64,7 @@ export BROWSER=google-chrome-stable
 # python pip
 export PATH=$PATH:/home/$USER/.local/bin/:/home/$USER/scripts/:/home/$USER/repos/cheri-exercises/tools/
 export LANG=en_US.UTF-8
-export CHERI_SDK=/home/$USER/cheri/output/sdk
 
-
-# [alias] cheri binutils
-alias cherimode="export PATH=$CHERI_SDK/bin:$PATH"
 
 ## [complete]
 # for kubectl auto completion
@@ -82,3 +82,4 @@ export PNPM_HOME="/home/$USER/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
 
+export VCPKG_ROOT=$HOME/.local/share/vcpkg
